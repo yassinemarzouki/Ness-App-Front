@@ -1,0 +1,38 @@
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+  <label class="lbl">اسم المستخدم أو البريد</label>
+  <div class="inp-wrap">
+    <span class="inp-icon">✉</span>
+    <input 
+      class="inp" 
+      type="text" 
+      formControlName="email"
+      placeholder="أدخل اسم المستخدم" 
+      autocomplete="username" />
+  </div>
+
+  <label class="lbl">كلمة المرور</label>
+  <div class="inp-wrap" style="margin-bottom: 10px">
+    <span class="inp-icon">🔒</span>
+    <input 
+      class="inp" 
+      type="password" 
+      formControlName="password"
+      placeholder="••••••••" 
+      autocomplete="current-password" />
+  </div>
+
+  <div class="row-rem">
+    <div class="chk-wrap">
+      <input class="chk" type="checkbox" id="remember" />
+      <label class="chk-lbl" for="remember">تذكرني</label>
+    </div>
+    <a class="forgot" href="#">نسيت كلمة المرور؟</a>
+  </div>
+
+  <button class="btn-gold" type="submit" [disabled]="!loginForm.valid">
+    <div class="btn-gold-glow"></div>
+    <div class="btn-gold-inner">تسجيل الدخول</div>
+  </button>
+
+  <div class="foot">ليس لديك حساب؟ <a (click)="switchTab()">سجّل الآن</a></div>
+</form>

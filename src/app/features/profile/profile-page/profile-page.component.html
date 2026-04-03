@@ -1,0 +1,166 @@
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<div class="profile-container">
+  <!-- Cover Image -->
+  <div class="cover-section">
+    <img [src]="userProfile.coverImage" alt="Cover" class="cover-image">
+  </div>
+
+  <!-- Profile Header -->
+  <div class="profile-header">
+    <!-- Avatar -->
+    <div class="avatar-container">
+      <img [src]="userProfile.avatar" alt="Avatar" class="avatar">
+      @if (userProfile.verified) {
+        <span class="verified-badge">✓</span>
+      }
+    </div>
+
+    <!-- User Info -->
+    <div class="user-info">
+      <div class="name-section">
+        <h1 class="display-name">{{ userProfile.displayName }} | {{ userProfile.username }}</h1>
+      </div>
+
+      <!-- Stats (Clickable) -->
+      <div class="stats">
+        <button class="stat-item stat-link" (click)="openStatModal('followers')" type="button">
+          <div class="stat-value">{{ formatNumber(userProfile.followers) }}</div>
+          <div class="stat-label">المتابعون</div>
+        </button>
+        <button class="stat-item stat-link" (click)="openStatModal('following')" type="button">
+          <div class="stat-value">{{ formatNumber(userProfile.following) }}</div>
+          <div class="stat-label">يتابع</div>
+        </button>
+        <button class="stat-item stat-link" (click)="openStatModal('likes')" type="button">
+          <div class="stat-value">{{ formatNumber(userProfile.likesCount) }}</div>
+          <div class="stat-label">الإعجابات</div>
+        </button>
+      </div>
+
+      <!-- Edit Profile Section -->
+      <div class="edit-profile-section">
+        <button class="btn-edit-profile" (click)="editProfile()" type="button">
+          ✏️ تعديل الملف الشخصي
+        </button>
+        <button class="btn-settings" type="button">⚙️</button>
+      </div>
+
+      <p class="bio">{{ userProfile.bio }}</p>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      @if (userProfile.isFollowing) {
+        <button class="btn btn-following" (click)="toggleFollow()" type="button">
+          متابع
+        </button>
+      } @else {
+        <button class="btn btn-follow" (click)="toggleFollow()" type="button">
+          متابعة
+        </button>
+      }
+      <button class="btn btn-message" (click)="sendMessage()" type="button">
+        رسالة
+      </button>
+    </div>
+  </div>
+
+  <!-- Tabs Navigation -->
+  <div class="tabs-navigation">
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'videos'"
+      (click)="activeTab = 'videos'"
+      type="button">
+      <div class="tab-label">الفيديوهات</div>
+      @if (activeTab === 'videos') {
+        <div class="tab-indicator"></div>
+      }
+    </button>
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'likes'"
+      (click)="activeTab = 'likes'"
+      type="button">
+      <div class="tab-label">الإعجابات</div>
+      @if (activeTab === 'likes') {
+        <div class="tab-indicator"></div>
+      }
+    </button>
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'saved'"
+      (click)="activeTab = 'saved'"
+      type="button">
+      <div class="tab-label">المحفوظة</div>
+      @if (activeTab === 'saved') {
+        <div class="tab-indicator"></div>
+      }
+    </button>
+  </div>
+
+  <!-- Videos Grid -->
+  <div class="videos-grid">
+    @for (video of getDisplayVideos(); track video.id) {
+      <div class="video-card">
+        <div class="video-thumbnail">
+          <img [src]="video.thumbnail" alt="Video thumbnail" class="thumbnail-img">
+          <div class="video-overlay">
+            <div class="play-icon">▶</div>
+            <div class="duration">0:30</div>
+          </div>
+        </div>
+        <div class="video-stats">
+          <div class="stat">
+            <span class="icon">❤️</span>
+            <span class="count">{{ formatNumber(video.likes) }}</span>
+          </div>
+          <div class="stat">
+            <span class="icon">💬</span>
+            <span class="count">{{ formatNumber(video.comments) }}</span>
+          </div>
+          <div class="stat">
+            <span class="icon">↗️</span>
+            <span class="count">{{ formatNumber(video.shares) }}</span>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Empty State -->
+  @if (getDisplayVideos().length === 0) {
+    <div class="empty-state">
+      <div class="empty-icon">📭</div>
+      <p>لا توجد فيديوهات حالياً</p>
+    </div>
+  }
+</div>
+
+<!-- Stat Modal Popup -->
+@if (showStatModal) {
+  <div class="modal-overlay" (click)="closeStatModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="closeStatModal()" type="button">✕</button>
+      
+      @switch(selectedStatType) {
+        @case ('followers') {
+          <h2 class="modal-title">المتابعون</h2>
+          <p class="modal-subtitle">{{ userProfile.followers }} متابع</p>
+        }
+        @case ('following') {
+          <h2 class="modal-title">يتابع</h2>
+          <p class="modal-subtitle">{{ userProfile.following }} حساب</p>
+        }
+        @case ('likes') {
+          <h2 class="modal-title">الإعجابات</h2>
+          <p class="modal-subtitle">{{ userProfile.likesCount }} إعجاب</p>
+        }
+      }
+      
+      <p class="modal-message">هذه الميزة قريباً 🚀</p>
+    </div>
+  </div>
+}

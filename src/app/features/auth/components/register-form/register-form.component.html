@@ -1,0 +1,64 @@
+<form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+  <label class="lbl">الاسم الكامل</label>
+  <div class="inp-wrap">
+    <span class="inp-icon">👤</span>
+    <input 
+      class="inp" 
+      type="text" 
+      formControlName="fullName"
+      placeholder="أدخل اسمك الكامل" 
+      autocomplete="name" />
+  </div>
+
+  <label class="lbl">البريد الإلكتروني</label>
+  <div class="inp-wrap">
+    <span class="inp-icon">✉</span>
+    <input 
+      class="inp" 
+      type="email" 
+      formControlName="email"
+      placeholder="example@email.com" 
+      autocomplete="email" />
+  </div>
+
+  <label class="lbl">كلمة المرور</label>
+  <div class="inp-wrap" style="margin-bottom: 6px">
+    <span class="inp-icon">🔒</span>
+    <input 
+      class="inp" 
+      type="password" 
+      formControlName="password"
+      placeholder="••••••••" 
+      (input)="checkStrength($event)"
+      autocomplete="new-password" />
+  </div>
+  <div class="strength">
+    <div class="seg" [ngClass]="{'w': passwordStrengthClass === 'w', 'm': passwordStrengthClass === 'm', 's': passwordStrengthClass === 's'}" [style.opacity]="strengthSegments[0] ? 1 : 0.2"></div>
+    <div class="seg" [ngClass]="{'w': passwordStrengthClass === 'w', 'm': passwordStrengthClass === 'm', 's': passwordStrengthClass === 's'}" [style.opacity]="strengthSegments[1] ? 1 : 0.2"></div>
+    <div class="seg" [ngClass]="{'w': passwordStrengthClass === 'w', 'm': passwordStrengthClass === 'm', 's': passwordStrengthClass === 's'}" [style.opacity]="strengthSegments[2] ? 1 : 0.2"></div>
+    <div class="seg" [ngClass]="{'w': passwordStrengthClass === 'w', 'm': passwordStrengthClass === 'm', 's': passwordStrengthClass === 's'}" [style.opacity]="strengthSegments[3] ? 1 : 0.2"></div>
+  </div>
+
+  <label class="lbl">تأكيد كلمة المرور</label>
+  <div class="inp-wrap">
+    <span class="inp-icon">🔒</span>
+    <input 
+      class="inp" 
+      type="password" 
+      formControlName="confirmPassword"
+      placeholder="••••••••" 
+      autocomplete="new-password" />
+  </div>
+
+  <div class="chk-wrap" style="margin-bottom: 20px">
+    <input class="chk" type="checkbox" id="terms" formControlName="terms" />
+    <label class="chk-lbl" for="terms">
+      أوافق على <a href="#" style="color: rgba(255, 193, 7, 0.7); text-decoration: none">الشروط والأحكام</a>
+    </label>
+  </div>
+
+  <button class="btn-gold" type="submit" [disabled]="!registerForm.valid">
+    <div class="btn-gold-glow"></div>
+    <div class="btn-gold-inner">إنشاء الحساب</div>
+  </button>
+</form>

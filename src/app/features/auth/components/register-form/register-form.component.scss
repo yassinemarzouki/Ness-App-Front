@@ -1,0 +1,340 @@
+.lbl {
+  display: block;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+
+.inp-wrap {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.inp-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(212, 165, 116, 0.45);
+  font-size: 15px;
+  pointer-events: none;
+}
+
+.inp {
+  width: 100%;
+  padding: 13px 44px 13px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(212, 165, 116, 0.12);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 15px;
+  direction: rtl;
+  transition: all 0.3s ease;
+  outline: none;
+  backdrop-filter: blur(4px);
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.22);
+    font-size: 14px;
+  }
+
+  &:hover {
+    border-color: rgba(212, 165, 116, 0.28);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  &:focus {
+    border-color: rgba(212, 165, 116, 0.55);
+    background: rgba(212, 165, 116, 0.04);
+    box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.07);
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 100px rgba(20, 15, 10, 0.9) inset !important;
+    -webkit-text-fill-color: #fff !important;
+  }
+}
+
+/* Password strength */
+.strength {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 16px;
+  margin-top: 7px;
+}
+
+.seg {
+  flex: 1;
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.07);
+  transition: background 0.4s;
+
+  &.w {
+    background: #e24b4a;
+  }
+
+  &.m {
+    background: #e59e27;
+  }
+
+  &.s {
+    background: #a0c86e;
+  }
+}
+
+/* Checkbox */
+.chk-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  direction: rtl;
+}
+
+.chk {
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+  flex-shrink: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(212, 165, 116, 0.25);
+  border-radius: 5px;
+  transition: all 0.25s;
+
+  &:checked {
+    background: linear-gradient(135deg, #d4a574, #c68a47);
+    border-color: #c68a47;
+  }
+}
+
+.chk-lbl {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+
+  a {
+    color: rgba(212, 165, 116, 0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #d4a574;
+    }
+  }
+}
+
+/* Gold button */
+.btn-gold {
+  width: 100%;
+  padding: 0;
+  height: 52px;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.btn-gold-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ffe259, #f5a623);
+  filter: blur(14px);
+  opacity: 0.45;
+  transform: translateY(4px) scaleX(0.88);
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 0;
+}
+
+.btn-gold-inner {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #ffe259 0%, #ffc200 45%, #f5a623 100%);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a0f00;
+  letter-spacing: 0.4px;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), filter 0.25s;
+  z-index: 1;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(255, 255, 255, 0.22),
+      transparent
+    );
+    transform: skewX(-20deg);
+    transition: left 0.55s ease;
+  }
+}
+
+.btn-gold:hover .btn-gold-inner {
+  transform: translateY(-2px);
+  filter: brightness(1.07);
+}
+
+.btn-gold:hover .btn-gold-inner::after {
+  left: 150%;
+}
+
+.btn-gold:hover .btn-gold-glow {
+  opacity: 0.7;
+  transform: translateY(6px) scaleX(0.85);
+}
+
+.btn-gold:active .btn-gold-inner {
+  transform: translateY(0);
+  filter: brightness(0.97);
+}
+
+.btn-gold:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+
+  .btn-gold-inner {
+    filter: brightness(0.9);
+  }
+
+  .btn-gold-glow {
+    opacity: 0.2;
+  }
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0;
+  color: rgba(255, 255, 255, 0.28);
+  font-size: 12px;
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(210, 140, 70, 0.1);
+  }
+}
+
+/* Google button */
+.btn-google {
+  width: 100%;
+  padding: 0;
+  height: 52px;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.btn-google-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.5);
+  filter: blur(14px);
+  opacity: 0.35;
+  transform: translateY(4px) scaleX(0.88);
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 0;
+}
+
+.btn-google-inner {
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #2a1810;
+  letter-spacing: 0.3px;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), filter 0.25s;
+  z-index: 1;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(255, 255, 255, 0.22),
+      transparent
+    );
+    transform: skewX(-20deg);
+    transition: left 0.55s ease;
+  }
+}
+
+.btn-google:hover .btn-google-inner {
+  transform: translateY(-2px);
+  filter: brightness(1.07);
+}
+
+.btn-google:hover .btn-google-inner::after {
+  left: 150%;
+}
+
+.btn-google:hover .btn-google-glow {
+  opacity: 0.65;
+  transform: translateY(6px) scaleX(0.85);
+}
+
+.btn-google:active .btn-google-inner {
+  transform: translateY(0);
+  filter: brightness(0.97);
+}
+
+/* Footer note */
+.foot {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.35);
+
+  a {
+    color: rgba(212, 165, 116, 0.7);
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #d4a574;
+    }
+  }
+}
+
+form {
+  width: 100%;
+}
