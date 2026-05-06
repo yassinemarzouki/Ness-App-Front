@@ -1,0 +1,39 @@
+<div class="course-card">
+  <div class="course-image">
+    <img [src]="course.image" [alt]="course.title" />
+    <div class="course-badge">{{ course.level }}</div>
+  </div>
+
+  <div class="course-content">
+    <h3 class="course-title">{{ course.title }}</h3>
+    <p class="course-description">{{ course.description }}</p>
+
+    <div class="course-meta">
+      <span class="instructor">👨‍🏫 {{ course.instructor }}</span>
+      <span class="students">👥 {{ course.students }} طالب</span>
+    </div>
+
+    <div class="course-rating">
+      <div class="stars">
+        <span class="star">⭐</span>
+        <span class="rating-value">{{ course.rating }}</span>
+        <span class="reviews">({{ course.reviews }} تقييم)</span>
+      </div>
+      <span class="duration">⏱️ {{ course.duration }}</span>
+    </div>
+
+    <div class="course-tags">
+      <span *ngFor="let tag of course.tags" class="tag">{{ tag }}</span>
+    </div>
+
+    <div class="course-footer">
+      <div class="course-price">
+        <span class="price-label">السعر:</span>
+        <span class="price-value">{{ course.price }} د.ت</span>
+      </div>
+      <button class="add-to-cart-btn" (click)="onAddToCart()">
+        🛒 أضف إلى السلة
+      </button>
+    </div>
+  </div>
+</div>

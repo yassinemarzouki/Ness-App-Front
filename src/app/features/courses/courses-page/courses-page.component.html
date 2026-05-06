@@ -1,0 +1,172 @@
+<div class="courses-container" dir="rtl">
+  <!-- Header -->
+  <header class="courses-header" [class.scroll-down]="isHeaderScrolled" #header>
+    <button class="hamburger-menu" (click)="toggleFilterPanel(); $event.stopPropagation()" title="فتح المرشحات">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    
+    <button class="cart-button" (click)="toggleCart()">
+      <span class="cart-icon">🛒</span>
+      <span class="cart-count" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+      <span class="cart-price" *ngIf="cartItemCount > 0">د.ت{{ cartTotal | number: '1.0-0' }}</span>
+    </button>
+    <div class="header-content">
+      <h1>متجر التعليم الإلكتروني</h1>
+      <p>استكشف وشتري آلاف الدورات من المدربين الخبراء</p>
+    </div>
+  </header>
+
+  <div class="courses-wrapper">
+    <!-- Filters Dropdown (Mobile) -->
+    <div class="filters-dropdown" [class.open]="isFilterPanelOpen">
+      <div class="filter-section">
+        <h3>البحث</h3>
+        <div class="search-box">
+          <input
+            type="text"
+            placeholder="ابحث عن الدورات..."
+            [(ngModel)]="searchQuery"
+            (keyup.enter)="onSearch()"
+            class="search-input"
+            dir="rtl"
+          />
+          <button class="search-btn" (click)="onSearch()">🔍</button>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-header">
+          <h3>الفئات</h3>
+        </div>
+        <div class="filter-options">
+          <label *ngFor="let category of categories" class="filter-option">
+            <input
+              type="checkbox"
+              [checked]="selectedCategory === category"
+              (change)="onCategoryChange(category)"
+            />
+            <span>{{ category }}</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-header">
+          <h3>المستوى</h3>
+        </div>
+        <div class="filter-options">
+          <label *ngFor="let level of levels" class="filter-option">
+            <input
+              type="checkbox"
+              [checked]="selectedLevel === level"
+              (change)="onLevelChange(level)"
+            />
+            <span>{{ getLevelLabel(level) }}</span>
+          </label>
+        </div>
+      </div>
+
+      <button *ngIf="selectedCategory || selectedLevel || searchQuery" class="clear-filters-btn" (click)="onClearFilters()">
+        امسح جميع الفلاتر
+      </button>
+    </div>
+
+    <!-- Sidebar Filters (Desktop) -->
+    <aside class="filters-sidebar">
+      <div class="filter-section">
+        <h3>البحث</h3>
+        <div class="search-box">
+          <input
+            type="text"
+            placeholder="ابحث عن الدورات..."
+            [(ngModel)]="searchQuery"
+            (keyup.enter)="onSearch()"
+            class="search-input"
+            dir="rtl"
+          />
+          <button class="search-btn" (click)="onSearch()">🔍</button>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-header">
+          <h3>الفئات</h3>
+        </div>
+        <div class="filter-options">
+          <label *ngFor="let category of categories" class="filter-option">
+            <input
+              type="checkbox"
+              [checked]="selectedCategory === category"
+              (change)="onCategoryChange(category)"
+            />
+            <span>{{ category }}</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="filter-section">
+        <div class="filter-header">
+          <h3>المستوى</h3>
+        </div>
+        <div class="filter-options">
+          <label *ngFor="let level of levels" class="filter-option">
+            <input
+              type="checkbox"
+              [checked]="selectedLevel === level"
+              (change)="onLevelChange(level)"
+            />
+            <span>{{ getLevelLabel(level) }}</span>
+          </label>
+        </div>
+      </div>
+
+      <button *ngIf="selectedCategory || selectedLevel || searchQuery" class="clear-filters-btn" (click)="onClearFilters()">
+        امسح جميع الفلاتر
+      </button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="courses-main">
+      <!-- Results Header -->
+      <div class="results-header">
+        <h2>
+          {{ filteredCourses.length }}
+          <span *ngIf="filteredCourses.length === 1">دورة</span>
+          <span *ngIf="filteredCourses.length !== 1">دورة</span>
+          تم العثور عليها
+        </h2>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="filteredCourses.length === 0" class="empty-state">
+        <div class="empty-icon">📚</div>
+        <h3>لم يتم العثور على دورات</h3>
+        <p *ngIf="searchQuery || selectedCategory || selectedLevel">
+          حاول تعديل مرشحاتك أو شروط البحث
+        </p>
+        <p *ngIf="!searchQuery && !selectedCategory && !selectedLevel">
+          لا توجد دورات متاحة
+        </p>
+      </div>
+
+      <!-- Courses Grid -->
+      <div class="courses-grid" *ngIf="filteredCourses.length > 0">
+        <app-course-card
+          *ngFor="let course of filteredCourses"
+          [course]="course"
+          (addToCart)="onAddToCart($event)"
+        ></app-course-card>
+      </div>
+    </main>
+  </div>
+
+  <!-- Cart Sidebar -->
+  <app-cart-sidebar
+    [isOpen]="isCartOpen"
+    [items]="cartItems"
+    [total]="cartTotal"
+    (close)="toggleCart()"
+  ></app-cart-sidebar>
+</div>

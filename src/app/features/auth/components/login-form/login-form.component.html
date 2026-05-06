@@ -29,9 +29,15 @@
     <a class="forgot" href="#">نسيت كلمة المرور؟</a>
   </div>
 
-  <button class="btn-gold" type="submit" [disabled]="!loginForm.valid">
+  <button class="btn-gold" type="submit" [disabled]="!loginForm.valid || loading">
     <div class="btn-gold-glow"></div>
-    <div class="btn-gold-inner">تسجيل الدخول</div>
+    <div class="btn-gold-inner">
+      @if (loading) {
+        <span>جاري تسجيل الدخول...</span>
+      } @else {
+        <span>تسجيل الدخول</span>
+      }
+    </div>
   </button>
 
   <div class="foot">ليس لديك حساب؟ <a (click)="switchTab()">سجّل الآن</a></div>

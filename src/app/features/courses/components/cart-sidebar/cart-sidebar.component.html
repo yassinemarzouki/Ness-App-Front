@@ -1,0 +1,56 @@
+<div class="cart-sidebar" [class.open]="isOpen">
+  <div class="cart-header">
+    <h2>سلة التسوق</h2>
+    <button class="close-btn" (click)="onClose()">✕</button>
+  </div>
+
+  <div class="cart-body">
+    <div *ngIf="items.length === 0" class="empty-cart">
+      <div class="empty-icon">🛒</div>
+      <p>سلتك فارغة</p>
+      <small>أضف دورات لبدء التسوق</small>
+    </div>
+
+    <div *ngIf="items.length > 0" class="cart-items">
+      <div *ngFor="let item of items" class="cart-item">
+        <img [src]="item.course.image" [alt]="item.course.title" />
+        <div class="item-details">
+          <h4>{{ item.course.title }}</h4>
+          <p class="price">{{ item.course.price }} د.ت</p>
+        </div>
+        <div class="item-controls">
+          <button 
+            class="qty-btn" 
+            (click)="onUpdateQuantity(item.course.id, item.quantity - 1)"
+            [disabled]="item.quantity <= 1">
+            −
+          </button>
+          <span class="qty">{{ item.quantity }}</span>
+          <button 
+            class="qty-btn" 
+            (click)="onUpdateQuantity(item.course.id, item.quantity + 1)">
+            +
+          </button>
+        </div>
+        <button 
+          class="remove-btn" 
+          (click)="onRemoveItem(item.course.id)"
+          title="حذف">
+          🗑️
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="items.length > 0" class="cart-footer">
+    <div class="total">
+      <span>المجموع:</span>
+      <span class="total-price">{{ total }} د.ت</span>
+    </div>
+    <button class="checkout-btn" (click)="onCheckout()">
+      متابعة الدفع
+    </button>
+  </div>
+</div>
+
+<div *ngIf="isOpen" class="cart-overlay" (click)="onClose()"></div>
