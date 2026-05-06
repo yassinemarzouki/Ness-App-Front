@@ -17,7 +17,7 @@ export class CoursesService {
       category: 'تطوير الويب',
       level: 'beginner',
       instructor: 'أحمد محمود',
-      image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=400&h=300&fit=crop',
+      image: '/assets/images/courses/course-1.jpg',
       tags: ['Angular', 'TypeScript', 'Web'],
       students: 1250,
       duration: '24 ساعة'
@@ -32,7 +32,7 @@ export class CoursesService {
       category: 'التصميم',
       level: 'beginner',
       instructor: 'فاطمة محمد',
-      image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop',
+      image: '/assets/images/courses/course-2.jpg',
       tags: ['UI/UX', 'Figma', 'Design'],
       students: 890,
       duration: '18 ساعة'
@@ -47,7 +47,7 @@ export class CoursesService {
       category: 'البرمجة',
       level: 'beginner',
       instructor: 'محمد علي',
-      image: 'https://images.unsplash.com/photo-1526374965328-7f5ae4e8b08e?w=400&h=300&fit=crop',
+      image: '/assets/images/courses/course-3.jpg',
       tags: ['Python', 'Programming', 'Basics'],
       students: 2100,
       duration: '32 ساعة'
@@ -62,7 +62,7 @@ export class CoursesService {
       category: 'قواعس البيانات',
       level: 'intermediate',
       instructor: 'سارة أحمد',
-      image: 'https://images.unsplash.com/photo-1516321318423-f06f70570ec0?w=400&h=300&fit=crop',
+      image: '/assets/images/courses/course-4.jpg',
       tags: ['SQL', 'Database', 'Data'],
       students: 645,
       duration: '28 ساعة'
@@ -77,7 +77,7 @@ export class CoursesService {
       category: 'تطوير الويب',
       level: 'advanced',
       instructor: 'كريم عبدالله',
-      image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop',
+      image: '/assets/images/courses/course-5.jpg',
       tags: ['React Native', 'Mobile', 'JavaScript'],
       students: 456,
       duration: '40 ساعة'
@@ -92,7 +92,7 @@ export class CoursesService {
       category: 'البرمجة',
       level: 'advanced',
       instructor: 'ليلى محمود',
-      image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop',
+      image: '/assets/images/courses/course-6.jpg',
       tags: ['Security', 'Cybersecurity', 'Protection'],
       students: 789,
       duration: '36 ساعة'
@@ -107,7 +107,7 @@ export class CoursesService {
       category: 'تطوير الويب',
       level: 'intermediate',
       instructor: 'محمود علي',
-      image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=400&h=300&fit=crop',
+      image: '/assets/images/courses/course-7.jpg',
       tags: ['Vue.js', 'Frontend', 'JavaScript'],
       students: 567,
       duration: '26 ساعة'
@@ -122,7 +122,7 @@ export class CoursesService {
       category: 'التصميم',
       level: 'intermediate',
       instructor: 'نور محمد',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop',
+      image: '/assets/images/courses/course-8.jpg',
       tags: ['Marketing', 'Ads', 'Digital'],
       students: 923,
       duration: '20 ساعة'
